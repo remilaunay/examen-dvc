@@ -73,7 +73,7 @@ stages:
       size: 1383
     params:
       configs/params.yaml:
-        cv: 3
+        cv: 4
         model:
           name: RandomForestRegressor
           grid:
@@ -94,7 +94,7 @@ stages:
     outs:
     - path: models/best_params.json
       hash: md5
-      md5: 527e4198a5d865529a98095c5a5001a1
+      md5: f3823972515b8f4e79448b37ab06c673
       size: 96
   train:
     cmd: python src/models/train_model.py
@@ -109,7 +109,7 @@ stages:
       size: 25951
     - path: models/best_params.json
       hash: md5
-      md5: 527e4198a5d865529a98095c5a5001a1
+      md5: f3823972515b8f4e79448b37ab06c673
       size: 96
     - path: src/models/train_model.py
       hash: md5
@@ -122,8 +122,8 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 1edf3868c7ee9f779ad60d669888b6c6
-      size: 4716513
+      md5: c72191f8afc8b86302831c986aa55703
+      size: 5397009
   evaluate:
     cmd: python src/models/evaluate_model.py
     deps:
@@ -137,8 +137,8 @@ stages:
       size: 6456
     - path: models/model.pkl
       hash: md5
-      md5: 1edf3868c7ee9f779ad60d669888b6c6
-      size: 4716513
+      md5: c72191f8afc8b86302831c986aa55703
+      size: 5397009
     - path: src/models/evaluate_model.py
       hash: md5
       md5: 7110ee0702ef7d8638992b1b92f609de
@@ -146,9 +146,9 @@ stages:
     outs:
     - path: data/predictions.csv
       hash: md5
-      md5: bf97b72c06b39a181549e5f724194bbe
-      size: 13206
+      md5: bbc67dc4f1bf733c1de00dce285e8e94
+      size: 13207
     - path: metrics/scores.json
       hash: md5
-      md5: 65cc76bfabd80c7692ff640d41c6ae74
+      md5: 74522c4443c8e5bf0f021aaf83053280
       size: 120
