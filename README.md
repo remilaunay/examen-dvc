@@ -69,8 +69,8 @@ L'onglet _data_ devra bien afficher les données.
 Le schéma de la pipeline crée par DagsHub qui doit ressembler à :
 ## Exécution locale du workflow
 
-Le workflow contient cinq étapes : split, normalisation, recherche d’hyperparamètres,
-entraînement et évaluation. Les hyperparamètres sont centralisés dans
+Le workflow contient cinq étapes : `split`, `normalize`, `gridsearch`, `training`
+et `evaluate`. Les hyperparamètres sont centralisés dans
 [`configs/params.yaml`](configs/params.yaml). Le modèle est une forêt aléatoire de
 régression et la configuration actuelle utilise une validation croisée à 3 plis (`cv: 3`).
 

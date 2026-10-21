@@ -22,7 +22,7 @@ stages:
     outs:
       - data/processed_data/X_train_scaled.csv
       - data/processed_data/X_test_scaled.csv
-  grid_search:
+  gridsearch:
     cmd: python src/models/grid_search.py
     deps:
       - src/models/grid_search.py
@@ -35,7 +35,7 @@ stages:
           - cv
     outs:
       - models/best_params.pkl
-  train:
+  training:
     cmd: python src/models/train_model.py
     deps:
       - src/models/train_model.py
