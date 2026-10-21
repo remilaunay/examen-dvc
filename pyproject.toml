@@ -1,0 +1,23 @@
+[project]
+name = "examen-dvc"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Remi LAUNAY", email = "launay3107@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "dvc>=3.50,<4",
+    "joblib>=1.4",
+    "pandas>=2.2",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.5",
+]
+
+[project.scripts]
+examen-dvc = "examen_dvc:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
