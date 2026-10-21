@@ -1,8 +1,8 @@
 """Find and persist the best random forest hyperparameters."""
 import argparse
-import json
 from pathlib import Path
 
+import joblib
 import pandas as pd
 import yaml
 from sklearn.ensemble import RandomForestRegressor
@@ -15,7 +15,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-dir", default="data/processed_data")
     parser.add_argument("--params", default="configs/params.yaml")
-    parser.add_argument("--output", default="models/best_params.json")
+    parser.add_argument("--output", default="models/best_params.pkl")
     args = parser.parse_args()
     with (ROOT / args.params).open() as f:
         cfg = yaml.safe_load(f)
@@ -30,7 +30,7 @@ def main():
     search.fit(X, y)
     output = ROOT / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(search.best_params_, indent=2) + "\n")
+    joblib.dump(search.best_params_, output)
 
 
 if __name__ == "__main__":

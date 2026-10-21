@@ -34,14 +34,14 @@ stages:
           - model
           - cv
     outs:
-      - models/best_params.json
+      - models/best_params.pkl
   train:
     cmd: python src/models/train_model.py
     deps:
       - src/models/train_model.py
       - data/processed_data/X_train_scaled.csv
       - data/processed_data/y_train.csv
-      - models/best_params.json
+      - models/best_params.pkl
     params:
       - configs/params.yaml:
           - random_state

@@ -28,7 +28,7 @@ ore_pulp_flow : Débit de la pulpe de minerai.
 ore_pulp_pH : Niveau de pH de la pulpe de minerai, qui peut affecter le processus de flottation.
 ore_pulp_density : Densité de la pulpe de minerai, un autre paramètre critique dans le processus de flottation.
 silica_concentrate : Concentration de silice dans le produit final, qui est la variable cible.
-L'objectif de la modélisation est de comprendre et de modéliser comment différents paramètres opérationnels affectent la concentration de silice dans le processus de flottation. Le jeu de données contient 1817 entrées, toutes les colonnes sont de type float64 et il n'y a pas de doublons ni de valeurs manquantes.
+L'objectif de la modélisation est de comprendre et de modéliser comment différents paramètres opérationnels affectent la concentration de silice dans le processus de flottation. Le CSV fourni contient 1817 entrées et une colonne `date` textuelle en plus des variables numériques décrites ci-dessus. Le script de split exclut automatiquement cette colonne non numérique des variables explicatives.
 
 Vous pouvez télécharger les données à travers le lien suivant : https://datascientest-mlops.s3.eu-west-1.amazonaws.com/mlops_dvc_fr/raw.csv.
 
@@ -43,7 +43,7 @@ Split des données en ensemble d'entraînement et de test. Notre variable cible 
 
 Normalisation des données. Comme vous pouvez le noter, les données sont dans des échelles très variés donc une normalisation est nécessaire. Vous pouvez utiliser des fonctions pré-existantes pour la construction de ce script. En sortie, ce script créera deux nouveaux datasets : (X_train_scaled, X_test_scaled) que vous sauvegarderez également dans data/processed.
 
-GridSearch des meilleurs paramètres à utiliser pour la modélisation. Vous déciderez le modèle de regression à implémenter et des paramètres à tester. À l'issue de ce script vous aurez les meilleurs paramètres sous forme de fichier .pkl que vous sauvegarderez dans le dossier models.
+GridSearch des meilleurs paramètres à utiliser pour la modélisation. Vous déciderez le modèle de regression à implémenter et des paramètres à tester. À l'issue de ce script vous aurez les meilleurs paramètres sous forme de fichier `.pkl` que vous sauvegarderez dans le dossier models.
 
 Entraînement du modèle. En utilisant les paramètres retrouvés à travers le GridSearch, on entraînera le modèle en sauvegardant le modèle entraîné dans le dossier models.
 
@@ -72,7 +72,7 @@ Le schéma de la pipeline crée par DagsHub qui doit ressembler à :
 Le workflow contient cinq étapes : split, normalisation, recherche d’hyperparamètres,
 entraînement et évaluation. Les hyperparamètres sont centralisés dans
 [`configs/params.yaml`](configs/params.yaml). Le modèle est une forêt aléatoire de
-régression et la recherche utilise une validation croisée à 5 plis.
+régression et la configuration actuelle utilise une validation croisée à 3 plis (`cv: 3`).
 
 Installez le projet dans l’environnement virtuel avec `uv sync`, puis placez le
 CSV téléchargé à l’emplacement `data/raw_data/raw.csv`. La commande `dvc repro`
@@ -80,5 +80,4 @@ exécute les étapes définies dans `dvc.yaml`. Les métriques sont écrites dan
 `metrics/scores.json`, les prédictions dans `data/predictions.csv` et le modèle
 dans `models/model.pkl`.
 
-Le remote DagsHub et le partage de dépôt sont à configurer par le propriétaire ;
-aucun identifiant ni remote personnel n’est inclus dans ce dépôt.
+Le remote DVC `origin` pointe vers le stockage DagsHub dans `.dvc/config`. Les clés d’accès restent dans `.dvc/config.local`, qui est ignoré par Git. Le propriétaire doit encore vérifier le partage du dépôt avec `licence.pedago` en lecture seule dans l’interface DagsHub.

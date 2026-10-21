@@ -69,8 +69,8 @@ stages:
       size: 25951
     - path: src/models/grid_search.py
       hash: md5
-      md5: f703dc5b9cfbb766548d3f5d203867c8
-      size: 1383
+      md5: a674ee42d4640f02e945b3ad07b2c6e5
+      size: 1357
     params:
       configs/params.yaml:
         cv: 3
@@ -92,10 +92,10 @@ stages:
           n_jobs: 1
         random_state: 42
     outs:
-    - path: models/best_params.json
+    - path: models/best_params.pkl
       hash: md5
-      md5: 527e4198a5d865529a98095c5a5001a1
-      size: 96
+      md5: 3edf3d2cd494dec69fa30862ffaf7888
+      size: 90
   train:
     cmd: python src/models/train_model.py
     deps:
@@ -107,14 +107,14 @@ stages:
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
-    - path: models/best_params.json
+    - path: models/best_params.pkl
       hash: md5
-      md5: 527e4198a5d865529a98095c5a5001a1
-      size: 96
+      md5: 3edf3d2cd494dec69fa30862ffaf7888
+      size: 90
     - path: src/models/train_model.py
       hash: md5
-      md5: c19b0426a7eb1e2b59345f29dae9d894
-      size: 1163
+      md5: f90b901d5e895c2bcdd2269f8586252f
+      size: 1137
     params:
       configs/params.yaml:
         model.n_jobs: 1

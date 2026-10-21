@@ -24,6 +24,6 @@ clean:
 	      data/processed_data/X_train_scaled.csv \
 	      data/processed_data/X_test_scaled.csv \
 	      data/predictions.csv \
-	      models/best_params.json \
+	      models/best_params.pkl \
 	      models/model.pkl \
 	      metrics/scores.json
